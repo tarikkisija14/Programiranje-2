@@ -81,7 +81,7 @@ public:
 		(*_trenutno)++;
 	}
 
-	Kolekcija& InsertAt(T1 el1,T2 el2,int lokacija) {
+	Kolekcija InsertAt(T1 el1,T2 el2,int lokacija) {
 		
 		(*_trenutno)++;
 		for (size_t i = *_trenutno - 1; i > lokacija; i--)
