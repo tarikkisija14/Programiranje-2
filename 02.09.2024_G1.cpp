@@ -109,11 +109,7 @@ public:
 			_elementi1[i - pozicija] = _elementi1[i];
 			_elementi2[i - pozicija] = _elementi2[i];
 		}
-		for (size_t i = *_trenutno - pozicija; i < *_trenutno; i++)
-		{
-			_elementi1[i] = NULL;
-			_elementi2[i] = NULL;
-		}
+		
 		*_trenutno -= pozicija;
 		return op;
 
