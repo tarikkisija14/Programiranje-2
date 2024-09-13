@@ -490,8 +490,9 @@ public:
 	}
 	
 	bool AddPogodak(Drzava d1, Drzava d2, const char* pretraga, Pogodak pogodak) {
-		for (size_t i = 0; i < _utakmice.getTrenutno(); i++)
-		{
+	for (size_t i = 0; i < _utakmice.getTrenutno(); i++)
+	{
+		if (_utakmice.getElement1(i).GetDrzava() == d1 && _utakmice.getElement2(i).GetDrzava() == d2) {
 			for (size_t j = 0; j < _utakmice.getElement1(i).GetIgraci().size(); j++)
 			{
 				auto& igraci = _utakmice.getElement1(i).GetIgraci()[j];
@@ -501,13 +502,16 @@ public:
 						tred.join();
 						return true;
 					}
-					
+
 				}
-				
+
 			}
 		}
-		for (size_t i = 0; i < _utakmice.getTrenutno(); i++)
-		{
+	}
+	for (size_t i = 0; i < _utakmice.getTrenutno(); i++)
+	{
+
+		if (_utakmice.getElement1(i).GetDrzava() == d1 && _utakmice.getElement2(i).GetDrzava() == d2) {
 			for (size_t j = 0; j < _utakmice.getElement2(i).GetIgraci().size(); j++)
 			{
 				auto& igraci = _utakmice.getElement2(i).GetIgraci()[j];
@@ -519,12 +523,12 @@ public:
 					}
 
 				}
-				
+
 			}
 		}
-		return false;
 	}
-
+	return false;
+}
 	friend ostream& operator<<(ostream& COUT, Prventstvo& obj) {
 
 		COUT << crt;
