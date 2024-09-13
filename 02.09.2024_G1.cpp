@@ -235,43 +235,26 @@ public:
 	}
 };
 
-char* GenerisiID(const char* imePrezime, int broj) {
-	
-	
-	const char* spacePtr = strchr(imePrezime, ' ');
-	char firstLetter = toupper(imePrezime[0]);
-	char lastLetter = spacePtr != nullptr ? toupper(spacePtr[1]) : '\0';
+char* GenerisiID(const string& imePrezime, int broj) {
+	string id = "";
+	string obrnuti = to_string(broj);
+	reverse(begin(obrnuti), end(obrnuti));
 
-	
-	char reversedNumber[5] = { 0 }; // Maksimalno 4 cifre + null terminator
-	int index = 0;
-	while (broj > 0 && index < 4) {
-		reversedNumber[index++] = (broj % 10) + '0'; // Dodaj cifre u obrnuto
-		broj /= 10;
-	}
-	reversedNumber[index] = '\0'; 
+	const size_t inicijali = imePrezime.find(' ') + 1;
+	id = toupper(imePrezime[0]);
 
-	
-	char* id = new char[8]; // Maksimalno 7 karaktera + null terminator
+	if (broj < 10)
+		id += "000";
+	else if (broj < 100 && broj>9)
+		id += "00";
+	else if (broj < 1000 && broj>99)
+		id += "0";
 
-	
-	int numDigits = strlen(reversedNumber);
-	if (numDigits == 1) {
-		snprintf(id, 8, "%c000%c%s", firstLetter, lastLetter, reversedNumber);
-	}
-	else if (numDigits == 2) {
-		snprintf(id, 8, "%c00%c%s", firstLetter, lastLetter, reversedNumber);
-	}
-	else if (numDigits == 3) {
-		snprintf(id, 8, "%c0%c%s", firstLetter, lastLetter, reversedNumber);
-	}
-	else {
-		// Ovo ne bi trebalo da se desi, ali samo za svaki slučaj
-		snprintf(id, 8, "%c%c%s", firstLetter, lastLetter, reversedNumber);
-	}
-
-	return id;
+	id += toupper(imePrezime[inicijali]);
+	id += obrnuti;
+	return GetNizKaraktera(id.c_str());
 }
+
 
 int brojCifara(const string& str) {
 	int brojac = 0;
